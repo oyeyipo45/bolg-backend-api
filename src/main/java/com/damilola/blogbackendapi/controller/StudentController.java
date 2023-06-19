@@ -34,28 +34,30 @@ public class StudentController {
     }
 
     @GetMapping("students/query")
-    public Student studentRequest (@RequestParam int id,
+    public ResponseEntity<Student> studentRequest (@RequestParam int id,
                                    @RequestParam String name) {
-        return new Student(id, name, "Oye");
+        Student student = new Student(id, name, "Oye");
+        return new ResponseEntity<>(student,  HttpStatus.OK);
     }
     @PostMapping("students")
-    public Student createStudent (@RequestBody Student student) {
-            return student;
+    public ResponseEntity<Student> createStudent (@RequestBody Student student) {
+            return new ResponseEntity<>(student, HttpStatus.CREATED);
     }
 
     @PutMapping("students/{id}")
-    public Student updateStudent (@RequestBody Student student,
+    public ResponseEntity<Student> updateStudent (@RequestBody Student student,
                                   @PathVariable int id) {
 
         Student firstStudent = new Student(1, "Dami",  "oye");
         firstStudent.setFirstName("damilola");
         firstStudent.setId(3);
-        return firstStudent;
+
+        return new ResponseEntity<>(firstStudent, HttpStatus.OK);
     }
 
     @DeleteMapping("students/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public String updateStudent (@PathVariable int id) {
-        return "Student deleted";
+    public ResponseEntity<String> updateStudent (@PathVariable int id) {
+        return new ResponseEntity<>("Student deleted", HttpStatus.OK);
     }
 }
