@@ -43,11 +43,16 @@ public class StudentController {
     @PutMapping("students/{id}")
     public Student updateStudent (@RequestBody Student student,
                                   @PathVariable int id) {
-        //String firstName = student.getLastName();
 
         Student firstStudent = new Student(1, "Dami",  "oye");
         firstStudent.setFirstName("damilola");
         firstStudent.setId(3);
         return firstStudent;
+    }
+
+    @DeleteMapping("students/{id}")
+    public String updateStudent (@PathVariable int id) {
+
+        return "Student deleted";
     }
 }
