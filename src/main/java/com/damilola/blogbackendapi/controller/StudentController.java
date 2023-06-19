@@ -1,9 +1,7 @@
 package com.damilola.blogbackendapi.controller;
 
 import com.damilola.blogbackendapi.bean.Student;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +26,28 @@ public class StudentController {
     }
 
     @GetMapping("students/{id}")
-    public Student oneStudent (@PathVariable int id) {
-        return new Student(id, "Gbemi", "Oye");
+    public Student oneStudent (@PathVariable("id") int studentId) {
+        return new Student(studentId, "Gbemi", "Oye");
     }
 
-    
+    @GetMapping("students/query")
+    public Student studentRequest (@RequestParam int id,
+                                   @RequestParam String name) {
+        return new Student(id, name, "Oye");
+    }
+    @PostMapping("students")
+    public Student createStudent (@RequestBody Student student) {
+            return student;
+    }
+
+    @PutMapping("students/{id}")
+    public Student updateStudent (@RequestBody Student student,
+                                  @PathVariable int id) {
+        //String firstName = student.getLastName();
+
+        Student firstStudent = new Student(1, "Dami",  "oye");
+        firstStudent.setFirstName("damilola");
+        firstStudent.setId(3);
+        return firstStudent;
+    }
 }
